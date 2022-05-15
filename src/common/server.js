@@ -1,9 +1,12 @@
 import express from "express";
-import routers from "../routers/index.js";
+import { InnerError } from "../errors/Inner.error.js";
+import middlewares from "../middlewares/index.js";
+import injectionManager from "./injection.manager.js";
 
 class Server {
   #app = express();
   #server = null;
+  #mainModule;
 
   static getInstance() {
     if (!this.instance) {
@@ -16,9 +19,8 @@ class Server {
   up(port) {
     return new Promise((res, rej) => {
       try {
-        for (const item of routers) {
-          this.#addRouter(item.router, item.path);
-        }
+        this.#init();
+        this.#initRouters();
 
         this.#server = this.#app.listen(port, () => {
           console.log(`Server is running on ${port}`);
@@ -43,8 +45,33 @@ class Server {
     });
   }
 
-  #addRouter(router, path) {
-    this.#app.use(path, router);
+  registerMainModule(module) {
+    this.#mainModule = module;
+  }
+
+  #initRouters() {
+    if (!this.#mainModule) {
+      throw new InnerError();
+    }
+
+    for (const item of this.#mainModule.imports) {
+      if (item.imports.length) {
+        throw new InnerError();
+      }
+
+      for (const routerItem of item.routers) {
+        this.#app.use(
+          routerItem.key,
+          injectionManager.inject(routerItem.name).router
+        );
+      }
+    }
+  }
+
+  #init() {
+    this.#app.use(express.json());
+    this.#app.use(express.urlencoded({ extended: true }));
+    this.#app.use(...middlewares);
   }
 }
 

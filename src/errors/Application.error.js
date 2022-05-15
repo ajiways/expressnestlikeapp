@@ -1,7 +1,5 @@
-export class ApplicationError extends Error {
-  constructor(error) {
-    const { message } = error;
-
-    super(message);
+export class ApplicationError {
+  constructor({ message }) {
+    this.message = message;
   }
 }
