@@ -11,7 +11,7 @@ export class DoctorController extends BaseController {
     try {
       const response = await this.doctorService.makeAppointment();
 
-      this.sendResponse(req, res, HttpCode.OK, { text: response });
+      this.sendResponse(req, res, HttpCode.OK, { data: response });
     } catch (error) {
       this.handleError(error, req, res);
     }
