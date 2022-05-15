@@ -2,9 +2,10 @@ import { Module } from "../common/module.js";
 import UserModule from "./user/user.module.js";
 import DoctorModule from "./doctor/doctor.module.js";
 import AppointmentModule from "./appointment/appointment.module.js";
+import ScheduleModule from "./schedule/schedule.module.js";
 
-const MainModule = new Module({
-  imports: [UserModule, DoctorModule, AppointmentModule],
+const mainModule = new Module({
+  imports: [UserModule, DoctorModule, AppointmentModule, ScheduleModule],
 });
 
-export default MainModule;
+export default mainModule;

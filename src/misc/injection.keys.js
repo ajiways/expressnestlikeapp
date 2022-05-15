@@ -7,3 +7,6 @@ export const DOCTOR_SERVICE = "doctorService";
 export const APPOINTMENT_CONTROLLER = "appointmentController";
 export const APPOINTMENT_SERVICE = "appointmentService";
 export const APPOINTMENT_ROUTER = "appointmentRouter";
+export const SCHEDULE_CONTROLLER = "scheduleController";
+export const SCHEDULE_SERVICE = "scheduleService";
+export const SCHEDULE_ROUTER = "scheduleRouter";
