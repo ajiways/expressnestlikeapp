@@ -8,9 +8,11 @@ export class UserController extends BaseController {
   }
 
   createUser = async (req, res) => {
-    try {
-      const { name, email } = req.body;
+    if (this.checkValidation(req, res)) return;
 
+    const { name, email } = req.body;
+
+    try {
       const response = await this.userService.createUser(name, email);
 
       this.sendResponse(req, res, HttpCode.CREATED, { user: response });

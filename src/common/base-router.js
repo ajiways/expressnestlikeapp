@@ -17,19 +17,19 @@ export class BaseRouter {
     this.router.get(key, handler);
   }
 
-  post(key, handler) {
+  post(key, validationArray, handler) {
     this.#registerRoute(key, "post", this.#postRoutes);
-    this.router.post(key, handler);
+    this.router.post(key, ...validationArray, handler);
   }
 
-  put(key, handler) {
+  put(key, validationArray, handler) {
     this.#registerRoute(key, "put", this.#putRoutes);
-    this.router.put(key, handler);
+    this.router.put(key, ...validationArray, handler);
   }
 
-  delete(key, handler) {
+  delete(key, validationArray, handler) {
     this.#registerRoute(key, "delete", this.#deleteRoutes);
-    this.router.delete(key, handler);
+    this.router.delete(key, ...validationArray, handler);
   }
 
   #checkIfRouteExists(key, type) {

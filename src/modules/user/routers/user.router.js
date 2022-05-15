@@ -1,4 +1,5 @@
 import { BaseRouter } from "../../../common/base-router.js";
+import { createUserValidations } from "../validations/user.validations.js";
 
 export class UserRouter extends BaseRouter {
   constructor(userController) {
@@ -8,6 +9,6 @@ export class UserRouter extends BaseRouter {
   }
 
   #init() {
-    this.post("/create", this.userController.createUser);
+    this.post("/create", createUserValidations, this.userController.createUser);
   }
 }
