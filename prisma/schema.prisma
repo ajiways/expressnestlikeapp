@@ -15,7 +15,7 @@ model User {
   @@map(name: "users")
   id String @id @default(uuid())
   name String @db.Char(255)
-  email String @db.Char(255)
+  email String @unique @db.Char(255)
   appointments Appointment[]
 }
 
@@ -31,16 +31,25 @@ model Schedule {
   @@map(name: "schedules")
   id String @id @default(uuid())
   doctor Doctor @relation(fields: [doctorId], references: [id])
-  doctorId String @unique
+  doctorId String
   date DateTime
-  appointments Appointment[]
+  slots Slot[]
+}
+
+model Slot {
+  @@map(name: "slots")
+  id String @id @default(uuid())
+  schedule Schedule @relation(fields: [scheduleId], references: [id])
+  scheduleId String
+  appointment Appointment?
+  time DateTime
 }
 
 model Appointment {
   @@map(name: "appointments")
   id String @id @default(uuid())
-  schedule Schedule @relation(fields: [scheduleId], references: [id])
-  scheduleId String
   user User @relation(fields: [userId], references: [id])
+  slot Slot @relation(fields: [slotId], references: [id])
+  slotId String
   userId String
 }
