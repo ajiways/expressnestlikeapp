@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mis
+      LANG: C.UTF-8
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  mis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3030:3000"
