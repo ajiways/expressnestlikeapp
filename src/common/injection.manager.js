@@ -1,4 +1,4 @@
-import awilix from "awilix";
+import awilix, { Lifetime } from "awilix";
 
 class InjectionManager {
   #container = awilix.createContainer({
@@ -19,6 +19,12 @@ class InjectionManager {
   makeInjectable(name, value) {
     this.#container.register({
       [name]: awilix.asClass(value).classic(),
+    });
+  }
+
+  makeInjectableAsSingleton(name, value) {
+    this.#container.register({
+      [name]: awilix.asClass(value).setLifetime(Lifetime.SINGLETON).classic(),
     });
   }
 }

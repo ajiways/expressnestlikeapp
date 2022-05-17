@@ -17,7 +17,11 @@ export class Module {
 
   #init() {
     for (const item of this.#providers) {
-      injectionManager.makeInjectable(item.name, item.class);
+      if (item.lifetime) {
+        injectionManager.makeInjectable(item.name, item.class);
+      } else {
+        injectionManager.makeInjectableAsSingleton(item.name, item.class);
+      }
     }
     for (const item of this.#controllers) {
       injectionManager.makeInjectable(item.name, item.class);

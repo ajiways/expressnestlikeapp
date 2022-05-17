@@ -1,23 +1,45 @@
 import pkg from "@prisma/client";
 import { RepositoryError } from "../errors/Repository.error.js";
-import { APPOINTMENT, DOCTOR, SCHEDULE, USER } from "../misc/schema.keys.js";
+import {
+  APPOINTMENT,
+  DOCTOR,
+  SCHEDULE,
+  SLOT,
+  USER,
+} from "../misc/schema.keys.js";
 const { PrismaClient } = pkg;
 
-const prisma = new PrismaClient();
+class Repository {
+  #prisma = new PrismaClient();
 
-export class Repository {
-  static get(key) {
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Repository();
+    }
+
+    return this.instance;
+  }
+
+  get(key) {
     switch (key) {
       case USER:
-        return prisma.user;
+        return this.#prisma.user;
       case SCHEDULE:
-        return prisma.schedule;
+        return this.#prisma.schedule;
       case APPOINTMENT:
-        return prisma.appointment;
+        return this.#prisma.appointment;
       case DOCTOR:
-        return prisma.doctor;
+        return this.#prisma.doctor;
+      case SLOT:
+        return this.#prisma.slot;
       default:
         throw new RepositoryError(key);
     }
   }
+
+  get client() {
+    return this.#prisma;
+  }
 }
+
+export default Repository.getInstance();

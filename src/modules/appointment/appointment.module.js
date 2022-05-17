@@ -1,3 +1,4 @@
+import { Lifetime } from "awilix";
 import { Module } from "../../common/module.js";
 import {
   APPOINTMENT_CONTROLLER,
@@ -10,7 +11,13 @@ import { AppointmentService } from "./services/appointment.service.js";
 
 const appointmentModule = new Module({
   controllers: [{ name: APPOINTMENT_CONTROLLER, class: AppointmentController }],
-  providers: [{ name: APPOINTMENT_SERVICE, class: AppointmentService }],
+  providers: [
+    {
+      name: APPOINTMENT_SERVICE,
+      class: AppointmentService,
+      lifetime: Lifetime.SINGLETON,
+    },
+  ],
   routers: [
     { name: APPOINTMENT_ROUTER, key: "/appointment", class: AppointmentRouter },
   ],

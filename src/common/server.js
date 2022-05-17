@@ -1,6 +1,7 @@
 import express from "express";
 import { InnerError } from "../errors/Inner.error.js";
 import middlewares from "../middlewares/index.js";
+import { bree } from "./cron.js";
 import injectionManager from "./injection.manager.js";
 
 class Server {
@@ -72,6 +73,8 @@ class Server {
     this.#app.use(express.json());
     this.#app.use(express.urlencoded({ extended: true }));
     this.#app.use(...middlewares);
+
+    bree.start();
   }
 }
 

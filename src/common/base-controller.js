@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { HttpCode } from "../misc/http-codes.js";
 import { ErrorHandler } from "./error-handler.js";
 import { validationResult } from "express-validator";

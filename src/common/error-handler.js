@@ -13,6 +13,7 @@ export class ErrorHandler {
         message: "Some serious error occured, let me know about it :)",
       });
     } else if (err instanceof ApiException) {
+      console.log(err);
       this.#logError(req, err);
       res.status(err.status);
       res.json({

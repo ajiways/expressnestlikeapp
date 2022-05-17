@@ -5,8 +5,4 @@ export class DoctorService extends AbstractService {
   constructor() {
     super({ repositoryKey: DOCTOR });
   }
-
-  makeAppointment() {
-    return "yeah";
-  }
 }

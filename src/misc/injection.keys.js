@@ -10,3 +10,4 @@ export const APPOINTMENT_ROUTER = "appointmentRouter";
 export const SCHEDULE_CONTROLLER = "scheduleController";
 export const SCHEDULE_SERVICE = "scheduleService";
 export const SCHEDULE_ROUTER = "scheduleRouter";
+export const SLOT_SERVICE = "slotService";

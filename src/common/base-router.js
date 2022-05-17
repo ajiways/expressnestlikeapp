@@ -12,9 +12,9 @@ export class BaseRouter {
     return this.#router;
   }
 
-  get(key, handler) {
+  get(key, validationArray, handler) {
     this.#registerRoute(key, "get", this.#getRoutes);
-    this.router.get(key, handler);
+    this.router.get(key, ...validationArray, handler);
   }
 
   post(key, validationArray, handler) {

@@ -8,7 +8,5 @@ export class DoctorRouter extends BaseRouter {
     this.#init();
   }
 
-  #init() {
-    this.post("/appointment", this.doctorController.appointment);
-  }
+  #init() {}
 }
